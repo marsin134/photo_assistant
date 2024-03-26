@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+<br><H1 align="center">Выберите эффект</H1>
+<div class="container-fluid">
+        <div class="row">
+            {% for item in effects%}
+            <div class="col-md-4" style="border: 2px solid black; text-align:center">
+                <img alt="Bootstrap Image Preview" src={{item[0]}} width="400"/>
+                <h3>
+                    {{item[1]}}
+                </h3>
+                <a class="navbar-brand" href="/"><button type="button" class="btn btn-success mb-3">
+                    Применить
+                </button></a>
+            </div>
+            {% endfor %}
+        </div>
+</div>
+{% endblock %}

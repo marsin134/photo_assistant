@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block content %}
+<link rel="stylesheet" type="static/css" href="stylesheet_delete_fon.css" />
+
+    <div class='regform mt-3'>
+        <h1 align="center">Add an effect</h1>
+    </div>
+
+    <form action='/make_eff/{{effect}}' class='main-form' method="POST" enctype="multipart/form-data">
+
+        <div class='text-center'>
+            <input type="file" id="file" name='file' style="margin-top:10px;margin-bottom:10px;">
+            <button type='submit' class='btn btn-success'> add
+            </button>
+        </div>
+
+    </form>
+
+    {% if rembg_img %}
+    <div class="row" style="margin-top:10px;margin-bottom:10px;">
+
+        <div class="col text-center" style="background-color: #fb2056ba;margin: 50px;border-radius: 20px;padding: 20px;">
+            <h2 style="color: #FFFFFF;">Original Image</h2><img src={{filename}}
+                style="display: block;margin-left: auto;margin-right: auto;">
+        </div>
+
+        <div class="col text-center" style="background-color: #fb2056ba;margin: 50px;border-radius: 20px;padding: 20px;">
+            <h2 style="color: #FFFFFF;">{{effect}} image</h2><img src={{rembg_img}}
+                style="display: block;margin-left: auto;margin-right: auto;">
+        </div>
+
+    </div>
+    {% else %}
+    <div class="row" style="margin-top:10px;margin-bottom:10px;">
+
+        <div class="col text-center" style="background-color: #fb2056ba;margin: 50px;border-radius: 20px;padding: 20px;">
+            <h2 style="color: #FFFFFF;">Example</h2><img src=/static/image/example_effects/example_effect.png
+                style="display: block;margin-left: auto;margin-right: auto;">
+        </div>
+
+        <div class="col text-center" style="background-color: #fb2056ba;margin: 50px;border-radius: 20px;padding: 20px;">
+            <h2 style="color: #FFFFFF;">{{effect}} image</h2><img src=/static/image/example_effects/{{effect}}.png
+                style="display: block;margin-left: auto;margin-right: auto;">
+        </div>
+
+    </div>
+    {% endif %}
+{{message}}
+{% endblock %}

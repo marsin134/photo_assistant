@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+     <!-- подключение стилевого файла фреймворка bootstrap -->
+     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+</head>
+<body>
+
+    <div class="navbar navbar-expand-md mx-auto navbar-dark bg-secondary bg-gradient">
+
+
+        <!-- бренд -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03"
+            aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <a class="navbar-brand" href="#">Photo assistant</a>
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+            <ul class="navbar-nav w-100  d-flex justify-content-center">
+                <li class="nav-item dropdown">
+                    <a href="" class="nav-link dropdown-toggle text-dark" data-toggle="dropdown">
+                        Редактирование
+                    </a>
+                    <div class="dropdown-menu">
+                        <a href="" class="dropdown-item">Добавить эффект</a>
+                    </div>
+                </li>
+
+
+                <li class="nav-item dropdown">
+                    <a href="" class="nav-link dropdown-toggle text-dark" data-toggle="dropdown">
+                        Удалить
+                    </a>
+                    <div class="dropdown-menu">
+                        <a href="" class="dropdown-item">Удалить фон</a>
+                    </div>
+                </li>
+
+
+                <li class="nav-item dropdown">
+                    <a href="" class="nav-link dropdown-toggle text-dark" data-toggle="dropdown">
+                        Создайте
+                    </a>
+                    <div class="dropdown-menu">
+                        <a href="" class="dropdown-item">Создать открытку</a>
+                    </div>
+                </li>
+
+
+                <li class="nav-item dropdown">
+                    <a href="" class="nav-link dropdown-toggle text-dark" data-toggle="dropdown">
+                        Поддержка
+                    </a>
+                    <div class="dropdown-menu">
+                        <a href="" class="dropdown-item">наш тг</a>
+                        <a href="" class="dropdown-item">наш вк</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        {% if current_user.is_authenticated %}
+    <a class="navbar-brand" href="/logout">{{ current_user.login }}</a>
+    {% else %}
+    <div class="col-md-0 text-start">
+            </a><button type="button" class="btn btn-primary me-2 bg-info">Войти/Регистрация</button>
+    </div>
+    {% endif %}
+    </div>
+
+
+
+    <!--подключение скриптового файла библиотеки jquery, необходимого для работы фреймворка-->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <!--подключение скриптового файла библиотеки popper, необходимого для работы фреймворка-->
+    <script src="https://cdn.jsdelivr.net/npm/ popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <!-- подключение скриптового файла фреймворка bootstrap -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    {% block content %}{% endblock %}
+</body>
+</html>
