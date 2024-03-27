@@ -19,13 +19,11 @@ def delete(upload_folder):
     file = request.files['file']
     if file and allowed_file(file.filename):
         filename = secure_filename(file.filename)
+        filename = original_name(filename)
+
         file.save(os.path.join(upload_folder, filename))
 
         original_im = correct_size(Image.open(os.path.join(upload_folder, filename)))
-
-        os.remove(os.path.join(upload_folder, filename))
-
-        filename = original_name(filename)
 
         original_im.save(os.path.join(upload_folder, filename))
         rembg_img_name = filename.split('.')[0] + "_rembg.png"

@@ -81,7 +81,7 @@ def delete_fons():
         return render_template('forma_delete_fon.html', message='Произошла ошибка, возможно вы не указали файл')
 
 
-@app.route('/test')
+@app.route('/choice_effects')
 def choice_effects():
     return render_template('forma_choice_effect.html', effects=effects.effects)
 
@@ -95,7 +95,8 @@ def make_effects(effect):
         if filename and rembg_img_name:
             return render_template('forma_make_effect.html', filename='/' + filename, rembg_img='/' + rembg_img_name,
                                    effect=effect)
-        return render_template('forma_make_effect.html', message='Произошла ошибка, возможно вы не указали файл')
+        return render_template('forma_make_effect.html', message='Произошла ошибка, возможно вы не указали файл',
+                               effect=effect)
 
 
 if __name__ == '__main__':

@@ -15,7 +15,7 @@ effects = [(UPLOAD_FOLDER + '/' + 'sharpness.png', 'sharpness'),
            (UPLOAD_FOLDER + '/' + 'blur.png', 'blur'), (UPLOAD_FOLDER + '/' + 'black_white.png', 'black_white'),
            (UPLOAD_FOLDER + '/' + 'black_find_edges.png', 'black_find_edges'),
            (UPLOAD_FOLDER + '/' + 'negative.png', 'negative'),
-           (UPLOAD_FOLDER + '/' + 'ping+.png', 'ping+'), (UPLOAD_FOLDER + '/' + 'violet+.png', 'violet+'),
+           (UPLOAD_FOLDER + '/' + 'red+.png', 'red+'), (UPLOAD_FOLDER + '/' + 'violet+.png', 'violet+'),
            (UPLOAD_FOLDER + '/' + 'blue+.png', 'blue+'), (UPLOAD_FOLDER + '/' + 'green+.png', 'green+')]
 
 
@@ -36,17 +36,17 @@ def violet_effect(size, image):
     for i in range(x):
         for j in range(y):
             r, g, b = pixels[i, j]
-            pixels[i, j] = g, b, r
+            pixels[i, j] = r, g // 2, b
     return image
 
 
-def ping_effect(size, image):
+def red_effect(size, image):
     pixels = image.load()
     x, y = size
     for i in range(x):
         for j in range(y):
             r, g, b = pixels[i, j]
-            pixels[i, j] = r, b, g
+            pixels[i, j] = r, g // 2, b // 2
     return image
 
 
@@ -66,7 +66,7 @@ def blue_effect(size, image):
     for i in range(x):
         for j in range(y):
             r, g, b = pixels[i, j]
-            pixels[i, j] = b, g, r
+            pixels[i, j] = r // 2, g // 2, b
     return image
 
 
@@ -76,7 +76,7 @@ def green_effect(size, image):
     for i in range(x):
         for j in range(y):
             r, g, b = pixels[i, j]
-            pixels[i, j] = g, r, b
+            pixels[i, j] = r // 2, g, b // 2
     return image
 
 
@@ -90,18 +90,16 @@ dict_make_effects = {'sharpness': ImageFilter.Kernel((3, 3), (-1, -1, -1, -1, 9,
                      'blur': ImageFilter.GaussianBlur(5),
                      'black_white': black_white, 'smooth': ImageFilter.SMOOTH,
                      'black_find_edges': ImageFilter.FIND_EDGES,
-                     'negative': negative, 'ping+': ping_effect, 'violet+': violet_effect, 'blue+': blue_effect,
+                     'negative': negative, 'red+': red_effect, 'violet+': violet_effect, 'blue+': blue_effect,
                      'green+': green_effect}
 
 
 def make_effect(effect_name, upload_folder):
     if effect_name in dict_make_effects:
         effect_fun = dict_make_effects[effect_name]
-        im, filename = apply_the_effect(upload_folder)
-        if im:
-            new_name = original_name(filename)
+        im, new_name = apply_the_effect(upload_folder)
+        if im and new_name:
             im.save(upload_folder + '/' + new_name)
-
             if isinstance(effect_fun, types.FunctionType):
                 effect_fun(im.size, im).save(upload_folder + '/' + new_name.split('.')[0] + "_effect.png")
                 works.add_works(current_user.get_id(), f'effect-{effect_name}',
@@ -111,16 +109,16 @@ def make_effect(effect_name, upload_folder):
             works.add_works(current_user.get_id(), f'effect-{effect_name}',
                             upload_folder + '/' + new_name.split('.')[0] + "_effect.png")
             return upload_folder + '/' + new_name, upload_folder + '/' + new_name.split('.')[0] + "_effect.png"
-        return None
-    return None
+        return None, None
+    return None, None
 
 
 def apply_the_effect(upload_folder):
     file = request.files['file']
     if file and allowed_file(file.filename):
         filename = secure_filename(file.filename)
+        filename = original_name(filename)
         file.save(os.path.join(upload_folder, filename))
         original_im = correct_size(Image.open(os.path.join(upload_folder, filename)))
-        os.remove(os.path.join(upload_folder, filename))
         return original_im, filename
-    return None
+    return None, None
