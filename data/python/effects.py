@@ -10,7 +10,7 @@ from flask_login import current_user
 UPLOAD_FOLDER = 'static/image/example_effects'
 
 effects = [(UPLOAD_FOLDER + '/' + 'sharpness.png', 'sharpness'),
-           (UPLOAD_FOLDER + '/' + 'quantization.bmp', 'quantization'),
+           (UPLOAD_FOLDER + '/' + 'quantization.png', 'quantization'),
            (UPLOAD_FOLDER + '/' + 'smooth.png', 'smooth'), (UPLOAD_FOLDER + '/' + 'pixel.png', 'pixel'),
            (UPLOAD_FOLDER + '/' + 'blur.png', 'blur'), (UPLOAD_FOLDER + '/' + 'black_white.png', 'black_white'),
            (UPLOAD_FOLDER + '/' + 'black_find_edges.png', 'black_find_edges'),
@@ -24,9 +24,14 @@ def black_white(size, image):
     pixels = image.load()
     for i in range(x):
         for j in range(y):
-            r, g, b = pixels[i, j]
-            bw = (r + g + b) // 3
-            pixels[i, j] = bw, bw, bw
+            if len(pixels[i, j]) == 3:
+                r, g, b = pixels[i, j]
+                bw = (r + g + b) // 3
+                pixels[i, j] = bw, bw, bw
+            else:
+                r, g, b, transparency = pixels[i, j]
+                bw = (r + g + b) // 3
+                pixels[i, j] = bw, bw, bw, transparency
     return image
 
 
@@ -35,8 +40,12 @@ def violet_effect(size, image):
     x, y = size
     for i in range(x):
         for j in range(y):
-            r, g, b = pixels[i, j]
-            pixels[i, j] = r, g // 2, b
+            if len(pixels[i, j]) == 3:
+                r, g, b = pixels[i, j]
+                pixels[i, j] = r, g // 2, b
+            else:
+                r, g, b, transparency = pixels[i, j]
+                pixels[i, j] = r, g // 2, b, transparency
     return image
 
 
@@ -45,8 +54,12 @@ def red_effect(size, image):
     x, y = size
     for i in range(x):
         for j in range(y):
-            r, g, b = pixels[i, j]
-            pixels[i, j] = r, g // 2, b // 2
+            if len(pixels[i, j]) == 3:
+                r, g, b = pixels[i, j]
+                pixels[i, j] = r, g // 2, b // 2
+            else:
+                r, g, b, transparency = pixels[i, j]
+                pixels[i, j] = r, g // 2, b // 2, transparency
     return image
 
 
@@ -55,8 +68,12 @@ def negative(size, image):
     x, y = size
     for i in range(x):
         for j in range(y):
-            r, g, b = pixels[i, j]
-            pixels[i, j] = 255 - r, 255 - g, 255 - b
+            if len(pixels[i, j]) == 3:
+                r, g, b = pixels[i, j]
+                pixels[i, j] = 255 - r, 255 - g, 255 - b
+            else:
+                r, g, b, transparency = pixels[i, j]
+                pixels[i, j] = 255 - r, 255 - g, 255 - b, transparency
     return image
 
 
@@ -65,8 +82,12 @@ def blue_effect(size, image):
     x, y = size
     for i in range(x):
         for j in range(y):
-            r, g, b = pixels[i, j]
-            pixels[i, j] = r // 2, g // 2, b
+            if len(pixels[i, j]) == 3:
+                r, g, b = pixels[i, j]
+                pixels[i, j] = r // 2, g // 2, b
+            else:
+                r, g, b, transparency = pixels[i, j]
+                pixels[i, j] = r // 2, g // 2, b, transparency
     return image
 
 
@@ -75,12 +96,16 @@ def green_effect(size, image):
     x, y = size
     for i in range(x):
         for j in range(y):
-            r, g, b = pixels[i, j]
-            pixels[i, j] = r // 2, g, b // 2
+            if len(pixels[i, j]) == 3:
+                r, g, b = pixels[i, j]
+                pixels[i, j] = r // 2, g, b // 2
+            else:
+                r, g, b, transparency = pixels[i, j]
+                pixels[i, j] = r // 2, g, b // 2, transparency
     return image
 
 
-def quantization_effect(im):
+def quantization_effect(size, im):
     im = im.quantize(16)
     return im
 

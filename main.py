@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect
-from data.python import delete_fon, db_session, effects
+from data.python import delete_fon, db_session, effects, create_image_sketch
 from data.python.users import User, LoginForm, RegisterForm
 from flask_login import LoginManager, login_user
 
@@ -97,6 +97,17 @@ def make_effects(effect):
                                    effect=effect)
         return render_template('forma_make_effect.html', message='Произошла ошибка, возможно вы не указали файл',
                                effect=effect)
+
+
+@app.route('/create_sketch', methods=['POST', 'GET'])
+def create_sketch_fons():
+    if request.method == 'GET':
+        return render_template('forma_create_image_pattern.html')
+    elif request.method == 'POST':
+        filename, rembg_img_name = create_image_sketch.create_sketch(UPLOAD_FOLDER)
+        if filename and rembg_img_name:
+            return render_template('forma_create_image_pattern.html', filename=filename, rembg_img=rembg_img_name)
+        return render_template('forma_create_image_pattern.html', message='Произошла ошибка, возможно вы не указали файл')
 
 
 if __name__ == '__main__':

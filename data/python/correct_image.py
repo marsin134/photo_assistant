@@ -3,7 +3,7 @@ from random import sample
 import os
 
 MAX_SIZE = 500
-CHARACTER_LENGTH = 5
+CHARACTER_LENGTH = 10
 
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'webp'}
 

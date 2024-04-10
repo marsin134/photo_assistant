@@ -4,14 +4,14 @@
 <link rel="stylesheet" type="static/css" href="stylesheet_delete_fon.css" />
 
     <div class='regform mt-3'>
-        <h1 align="center">Remove Background</h1>
+        <h1 align="center">Creating a sketch</h1>
     </div>
 
-    <form action='/delete_fon' class='main-form' method="POST" enctype="multipart/form-data">
+    <form action='/create_sketch' class='main-form' method="POST" enctype="multipart/form-data">
 
         <div class='text-center'>
             <input type="file" id="file" name='file' style="margin-top:10px;margin-bottom:10px;">
-            <button type='submit' class='btn btn-success'> Remove Background
+            <button type='submit' class='btn btn-success'> create
             </button>
         </div>
 
@@ -26,7 +26,7 @@
         </div>
 
         <div class="col text-center" style="background-color: #fb2056ba;margin: 50px;border-radius: 20px;padding: 20px;">
-            <h2 style="color: #FFFFFF;">Image with Background Removed</h2><img src={{rembg_img}}
+            <h2 style="color: #FFFFFF;">Sketch</h2><img src={{rembg_img}}
                 style="display: block;margin-left: auto;margin-right: auto;">
         </div>
 
@@ -35,12 +35,12 @@
     <div class="row" style="margin-top:10px;margin-bottom:10px;">
 
         <div class="col text-center" style="background-color: #fb2056ba;margin: 50px;border-radius: 20px;padding: 20px;">
-            <h2 style="color: #FFFFFF;">Example</h2><img src=static/image/delete_fon_example/example.png
+            <h2 style="color: #FFFFFF;">Example</h2><img src=static/image/sketch_example/example.png
                 style="display: block;margin-left: auto;margin-right: auto;">
         </div>
 
         <div class="col text-center" style="background-color: #fb2056ba;margin: 50px;border-radius: 20px;padding: 20px;">
-            <h2 style="color: #FFFFFF;">Image with Background Removed</h2><img src=static/image/delete_fon_example/example_rembg.png
+            <h2 style="color: #FFFFFF;">Sketch</h2><img src=static/image/sketch_example/example_sketh.png
                 style="display: block;margin-left: auto;margin-right: auto;">
         </div>
 
