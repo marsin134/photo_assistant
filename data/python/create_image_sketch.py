@@ -23,14 +23,16 @@ def create_sketch(upload_folder):
         filename = original_name(filename)
 
         file.save(os.path.join(upload_folder, filename))
+        im = Image.open(os.path.join(upload_folder, filename))
+        if im.load()[0, 0] != 0:
+            original_im = correct_size(Image.open(os.path.join(upload_folder, filename)))
 
-        original_im = correct_size(Image.open(os.path.join(upload_folder, filename)))
+            original_im.save(os.path.join(upload_folder, filename))
+            rembg_img_name = filename.split('.')[0] + "_rembg.png"
 
-        original_im.save(os.path.join(upload_folder, filename))
-        rembg_img_name = filename.split('.')[0] + "_rembg.png"
+            make_sketch(upload_folder + '/' + filename, upload_folder + '/' + rembg_img_name)
 
-        make_sketch(upload_folder + '/' + filename, upload_folder + '/' + rembg_img_name)
-
-        works.add_works(current_user.get_id(), 'delete_fons', upload_folder + '/' + rembg_img_name)
-        return upload_folder + '/' + filename, upload_folder + '/' + rembg_img_name
+            works.add_works(current_user.get_id(), 'delete_fons', upload_folder + '/' + rembg_img_name)
+            return upload_folder + '/' + filename, upload_folder + '/' + rembg_img_name
+        return None, None
     return None, None

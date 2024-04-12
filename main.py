@@ -1,7 +1,9 @@
-from flask import Flask, render_template, request, redirect
-from data.python import delete_fon, db_session, effects, create_image_sketch
+import flask_login
+from data.python.works import Works
+from flask import Flask, render_template, request, redirect, make_response, jsonify
+from data.python import delete_fon, db_session, effects, create_image_sketch, users_api, works_api
 from data.python.users import User, LoginForm, RegisterForm
-from flask_login import LoginManager, login_user
+from flask_login import LoginManager, login_user, logout_user
 
 UPLOAD_FOLDER = 'static/image'
 URL = '127.0.0.1'
@@ -25,7 +27,7 @@ def load_user(user_id):
 @app.route("/")
 @app.route('/index')
 def index():
-    return render_template('test.html')
+    return render_template('business card.html')
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -35,7 +37,7 @@ def login():
         db_sess = db_session.create_session()
         user = db_sess.query(User).filter(User.login == form.login.data).first()
         if user and user.check_password(form.password.data):
-            # login_user(user, remember=form.remember_me.data)
+            login_user(user, remember=form.remember_me.data)
             login_user(user)
             return redirect("/")
         return render_template('login_form.html',
@@ -107,9 +109,38 @@ def create_sketch_fons():
         filename, rembg_img_name = create_image_sketch.create_sketch(UPLOAD_FOLDER)
         if filename and rembg_img_name:
             return render_template('forma_create_image_pattern.html', filename=filename, rembg_img=rembg_img_name)
-        return render_template('forma_create_image_pattern.html', message='Произошла ошибка, возможно вы не указали файл')
+        return render_template('forma_create_image_pattern.html',
+                               message='Произошла ошибка, возможно вы не указали файл')
+
+
+@app.route('/exit')
+def exit_in_user():
+    logout_user()
+    return redirect("/")
+
+
+@app.route('/account')
+def account():
+    db_sess = db_session.create_session()
+    if flask_login.current_user.is_authenticated:
+        image_user = [(elem.type_works, elem.name_file) for elem in
+                      db_sess.query(Works).filter(Works.user_id == int(flask_login.current_user.id))]
+        return render_template('account_form.html', image_user=image_user)
+    return redirect("/")
+
+
+@app.errorhandler(404)
+def not_found(error):
+    return make_response(jsonify({'error': 'Not found'}), 404)
+
+
+@app.errorhandler(400)
+def bad_request(_):
+    return make_response(jsonify({'error': 'Bad Request'}), 400)
 
 
 if __name__ == '__main__':
     db_session.global_init("db/photo_assistant.db")
+    app.register_blueprint(users_api.blueprint)
+    app.register_blueprint(works_api.blueprint)
     app.run(port=8080, host=URL, debug=True)

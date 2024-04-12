@@ -123,7 +123,7 @@ def make_effect(effect_name, upload_folder):
     if effect_name in dict_make_effects:
         effect_fun = dict_make_effects[effect_name]
         im, new_name = apply_the_effect(upload_folder)
-        if im and new_name:
+        if im and new_name and im.load()[0, 0] != 0:
             im.save(upload_folder + '/' + new_name)
             if isinstance(effect_fun, types.FunctionType):
                 effect_fun(im.size, im).save(upload_folder + '/' + new_name.split('.')[0] + "_effect.png")

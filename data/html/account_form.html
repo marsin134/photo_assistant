@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+<br><H1 align="center">Галерея пользователя {{current_user.login}}</H1>
+<div class="container-fluid">
+        <div class="row">
+            {% for item in image_user%}
+            <div class="col-md-4" style="border: 2px solid black; text-align:center">
+                <img alt="Bootstrap Image Preview" src={{item[1]}} width="400" height="250"/>
+                <h3>
+                    {{item[0]}}
+                </h3>
+            </div>
+            {% endfor %}
+        </div>
+    <br>
+    <div class="col-md-0 text-start" style="text-align:center">
+        <a href="/exit"><button type="button" class="btn btn-primary me-2 bg-info">Выйти из аккаунта</button></a>
+    </div>
+</div>
+{% endblock %}
