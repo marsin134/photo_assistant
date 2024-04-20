@@ -4,6 +4,13 @@ from flask import Flask, render_template, request, redirect, make_response, json
 from data.python import delete_fon, db_session, effects, create_image_sketch, users_api, works_api
 from data.python.users import User, LoginForm, RegisterForm
 from flask_login import LoginManager, login_user, logout_user
+import logging
+
+
+logging.basicConfig(
+    filename='data/log/example.log',
+    format='%(asctime)s %(levelname)s %(name)s %(message)s'
+)
 
 UPLOAD_FOLDER = 'static/image'
 URL = '127.0.0.1'
@@ -20,22 +27,27 @@ login_manager.init_app(app)
 
 @login_manager.user_loader
 def load_user(user_id):
+    """Загрузка пользователя"""
     db_sess = db_session.create_session()
     return db_sess.query(User).get(user_id)
 
 
 @app.route("/")
-@app.route('/index')
 def index():
+    """Визитка"""
     return render_template('business card.html')
 
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+    """Вход в аккаунт пользователя"""
+
     form = LoginForm()
     if form.validate_on_submit():
         db_sess = db_session.create_session()
         user = db_sess.query(User).filter(User.login == form.login.data).first()
+
+        # проверяем существование пользователя и соответствие паролей
         if user and user.check_password(form.password.data):
             login_user(user, remember=form.remember_me.data)
             login_user(user)
@@ -48,19 +60,23 @@ def login():
 
 @app.route('/register', methods=['GET', 'POST'])
 def reqister():
+    """Регистрация пользователя"""
+
     form = RegisterForm()
     if form.validate_on_submit():
-        if form.password.data != form.password_again.data:
+
+        if form.password.data != form.password_again.data:  # проверка на соответствие паролей
             return render_template('register_form.html', title='Регистрация',
                                    form=form,
                                    message="Пароли не совпадают")
+
         db_sess = db_session.create_session()
         if db_sess.query(User).filter(User.email == form.email.data).first() or \
-                db_sess.query(User).filter(User.login == form.login.data).first():
+                db_sess.query(User).filter(User.login == form.login.data).first():  # проверка на оригинальное имя
             return render_template('register_form.html', title='Регистрация',
                                    form=form,
                                    message="Такой пользователь уже есть")
-        else:
+        else:  # регистрируем пользователя
             user = User(
                 login=form.login.data,
                 email=form.email.data
@@ -74,27 +90,32 @@ def reqister():
 
 @app.route('/delete_fon', methods=['POST', 'GET'])
 def delete_fons():
+    """Удаление фона"""
     if request.method == 'GET':
         return render_template('forma_delete_fon.html')
     elif request.method == 'POST':
-        filename, rembg_img_name = delete_fon.delete(UPLOAD_FOLDER)
-        if filename and rembg_img_name:
+        filename, rembg_img_name = delete_fon.delete(UPLOAD_FOLDER)  # получаем обработанное изображение
+        if filename and rembg_img_name:  # проверяем на наличие ошибок
             return render_template('forma_delete_fon.html', filename=filename, rembg_img=rembg_img_name)
         return render_template('forma_delete_fon.html', message='Произошла ошибка, возможно вы не указали файл')
 
 
 @app.route('/choice_effects')
 def choice_effects():
+    """Выбор эффекта"""
     return render_template('forma_choice_effect.html', effects=effects.effects)
 
 
 @app.route('/make_eff/<effect>', methods=['POST', 'GET'])
 def make_effects(effect):
+    """Наложение эффекта"""
     if request.method == 'GET':
         return render_template('forma_make_effect.html', effect=effect)
     elif request.method == 'POST':
+        # получаем обработанное изображение
         filename, rembg_img_name = effects.make_effect(effect, UPLOAD_FOLDER + '/effect_im')
-        if filename and rembg_img_name:
+
+        if filename and rembg_img_name:   # проверяем на наличие ошибок
             return render_template('forma_make_effect.html', filename='/' + filename, rembg_img='/' + rembg_img_name,
                                    effect=effect)
         return render_template('forma_make_effect.html', message='Произошла ошибка, возможно вы не указали файл',
@@ -103,11 +124,12 @@ def make_effects(effect):
 
 @app.route('/create_sketch', methods=['POST', 'GET'])
 def create_sketch_fons():
+    """Создание наброска"""
     if request.method == 'GET':
         return render_template('forma_create_image_pattern.html')
     elif request.method == 'POST':
-        filename, rembg_img_name = create_image_sketch.create_sketch(UPLOAD_FOLDER)
-        if filename and rembg_img_name:
+        filename, rembg_img_name = create_image_sketch.create_sketch(UPLOAD_FOLDER)  # получаем обработанное изображение
+        if filename and rembg_img_name:  # проверяем на наличие ошибок
             return render_template('forma_create_image_pattern.html', filename=filename, rembg_img=rembg_img_name)
         return render_template('forma_create_image_pattern.html',
                                message='Произошла ошибка, возможно вы не указали файл')
@@ -115,15 +137,17 @@ def create_sketch_fons():
 
 @app.route('/exit')
 def exit_in_user():
+    """Выход из аккаунта пользователя"""
     logout_user()
     return redirect("/")
 
 
 @app.route('/account')
 def account():
+    """Галерея пользователя"""
     db_sess = db_session.create_session()
     if flask_login.current_user.is_authenticated:
-        image_user = [(elem.type_works, elem.name_file) for elem in
+        image_user = [(elem.type_works, elem.name_file) for elem in  # получаем изображения пользователя
                       db_sess.query(Works).filter(Works.user_id == int(flask_login.current_user.id))]
         return render_template('account_form.html', image_user=image_user)
     return redirect("/")

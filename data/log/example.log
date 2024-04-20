@@ -1,0 +1,59 @@
+2024-04-20 12:04:03,101 INFO werkzeug 127.0.0.1 - - [20/Apr/2024 12:04:03] "GET /account HTTP/1.1" 200 -
+2024-04-20 12:04:03,118 INFO werkzeug 127.0.0.1 - - [20/Apr/2024 12:04:03] "[36mGET /static/image/effect_im/photo_2024-04-11_20-44-54_2uHqyiwOEMV_effectEOkbNLoxuR_effect.png HTTP/1.1[0m" 304 -
+2024-04-20 12:04:03,121 INFO werkzeug 127.0.0.1 - - [20/Apr/2024 12:04:03] "[36mGET /static/image/effect_im/photo_2024-04-11_20-44-54_2uHqyiwOEMV_effecttBqhxEjcCl_effect.png HTTP/1.1[0m" 304 -
+2024-04-20 12:04:03,129 INFO werkzeug 127.0.0.1 - - [20/Apr/2024 12:04:03] "[36mGET /static/image/effect_im/1679290408_3-58EMqQLohRrt_effectrzswIkvpqC_effect.png HTTP/1.1[0m" 304 -
+2024-04-20 12:04:03,134 INFO werkzeug 127.0.0.1 - - [20/Apr/2024 12:04:03] "[36mGET /static/image/effect_im/1679290408_3-58EMqQLohRrt_effectHBxmvdEfPn_effect.png HTTP/1.1[0m" 304 -
+2024-04-20 12:04:03,141 INFO werkzeug 127.0.0.1 - - [20/Apr/2024 12:04:03] "[36mGET /static/image/effect_im/1679290408_3-58EMqQLohRrt_effectTnSwULOykB_effect.png HTTP/1.1[0m" 304 -
+2024-04-20 12:04:04,729 INFO werkzeug 127.0.0.1 - - [20/Apr/2024 12:04:04] "[32mGET /exit HTTP/1.1[0m" 302 -
+2024-04-20 12:04:04,735 INFO werkzeug 127.0.0.1 - - [20/Apr/2024 12:04:04] "GET / HTTP/1.1" 200 -
+2024-04-20 12:04:04,751 INFO werkzeug 127.0.0.1 - - [20/Apr/2024 12:04:04] "[36mGET /static/image/example_effects/blue+.png HTTP/1.1[0m" 304 -
+2024-04-20 12:04:04,755 INFO werkzeug 127.0.0.1 - - [20/Apr/2024 12:04:04] "[36mGET /static/image/delete_fon_example/example_rembg.png HTTP/1.1[0m" 304 -
+2024-04-20 12:04:04,760 INFO werkzeug 127.0.0.1 - - [20/Apr/2024 12:04:04] "[36mGET /static/image/sketch_example/example_sketh.png HTTP/1.1[0m" 304 -
+2024-04-20 12:04:11,823 INFO werkzeug 127.0.0.1 - - [20/Apr/2024 12:04:11] "GET /login HTTP/1.1" 200 -
+2024-04-20 12:04:19,914 INFO werkzeug 127.0.0.1 - - [20/Apr/2024 12:04:19] "[32mPOST /login HTTP/1.1[0m" 302 -
+2024-04-20 12:04:19,919 INFO werkzeug 127.0.0.1 - - [20/Apr/2024 12:04:19] "GET / HTTP/1.1" 200 -
+2024-04-20 12:04:19,930 INFO werkzeug 127.0.0.1 - - [20/Apr/2024 12:04:19] "[36mGET /static/image/example_effects/blue+.png HTTP/1.1[0m" 304 -
+2024-04-20 12:04:19,934 INFO werkzeug 127.0.0.1 - - [20/Apr/2024 12:04:19] "[36mGET /static/image/delete_fon_example/example_rembg.png HTTP/1.1[0m" 304 -
+2024-04-20 12:04:19,940 INFO werkzeug 127.0.0.1 - - [20/Apr/2024 12:04:19] "[36mGET /static/image/sketch_example/example_sketh.png HTTP/1.1[0m" 304 -
+2024-04-20 12:04:38,104 INFO werkzeug  * Detected change in 'C:\\Users\\Hasee\\PycharmProjects\\photo assistant\\main.py', reloading
+2024-04-20 12:04:38,272 INFO werkzeug  * Restarting with stat
+2024-04-20 12:04:40,236 WARNING werkzeug  * Debugger is active!
+2024-04-20 12:04:40,238 INFO werkzeug  * Debugger PIN: 662-248-788
+2024-04-20 12:05:34,391 INFO werkzeug 127.0.0.1 - - [20/Apr/2024 12:05:34] "GET /delete_fon HTTP/1.1" 200 -
+2024-04-20 12:05:34,764 INFO werkzeug 127.0.0.1 - - [20/Apr/2024 12:05:34] "GET /static/image/delete_fon_example/example.png HTTP/1.1" 200 -
+2024-04-20 12:05:34,766 INFO werkzeug 127.0.0.1 - - [20/Apr/2024 12:05:34] "[36mGET /static/image/delete_fon_example/example_rembg.png HTTP/1.1[0m" 304 -
+2024-04-20 12:05:55,142 INFO werkzeug 127.0.0.1 - - [20/Apr/2024 12:05:55] "POST /delete_fon HTTP/1.1" 200 -
+2024-04-20 12:05:55,149 INFO werkzeug 127.0.0.1 - - [20/Apr/2024 12:05:55] "GET /static/image/delete_fon/1679290408_3-58EMqQLohRrt_effectRZFDCLvsJj_effectzHeLUtPRXc.png HTTP/1.1" 200 -
+2024-04-20 12:05:55,157 INFO werkzeug 127.0.0.1 - - [20/Apr/2024 12:05:55] "GET /static/image/delete_fon/1679290408_3-58EMqQLohRrt_effectRZFDCLvsJj_effectzHeLUtPRXc_rembg.png HTTP/1.1" 200 -
+2024-04-20 12:08:14,070 INFO werkzeug [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:8080
+2024-04-20 12:08:14,070 INFO werkzeug [33mPress CTRL+C to quit[0m
+2024-04-20 12:08:14,071 INFO werkzeug  * Restarting with stat
+2024-04-20 12:08:15,732 WARNING werkzeug  * Debugger is active!
+2024-04-20 12:08:15,733 INFO werkzeug  * Debugger PIN: 662-248-788
+2024-04-20 12:08:21,633 INFO werkzeug 127.0.0.1 - - [20/Apr/2024 12:08:21] "GET / HTTP/1.1" 200 -
+2024-04-20 12:08:21,999 INFO werkzeug 127.0.0.1 - - [20/Apr/2024 12:08:21] "[36mGET /static/image/sketch_example/example_sketh.png HTTP/1.1[0m" 304 -
+2024-04-20 12:08:21,999 INFO werkzeug 127.0.0.1 - - [20/Apr/2024 12:08:21] "[36mGET /static/image/example_effects/blue+.png HTTP/1.1[0m" 304 -
+2024-04-20 12:08:22,000 INFO werkzeug 127.0.0.1 - - [20/Apr/2024 12:08:22] "[36mGET /static/image/delete_fon_example/example_rembg.png HTTP/1.1[0m" 304 -
+2024-04-20 12:08:26,923 INFO werkzeug 127.0.0.1 - - [20/Apr/2024 12:08:26] "GET /choice_effects HTTP/1.1" 200 -
+2024-04-20 12:08:26,943 INFO werkzeug 127.0.0.1 - - [20/Apr/2024 12:08:26] "GET /static/image/example_effects/sharpness.png HTTP/1.1" 200 -
+2024-04-20 12:08:26,948 INFO werkzeug 127.0.0.1 - - [20/Apr/2024 12:08:26] "GET /static/image/example_effects/quantization.png HTTP/1.1" 200 -
+2024-04-20 12:08:26,951 INFO werkzeug 127.0.0.1 - - [20/Apr/2024 12:08:26] "[36mGET /static/image/example_effects/blue+.png HTTP/1.1[0m" 304 -
+2024-04-20 12:08:26,973 INFO werkzeug 127.0.0.1 - - [20/Apr/2024 12:08:26] "GET /static/image/example_effects/smooth.png HTTP/1.1" 200 -
+2024-04-20 12:08:26,980 INFO werkzeug 127.0.0.1 - - [20/Apr/2024 12:08:26] "GET /static/image/example_effects/pixel.png HTTP/1.1" 200 -
+2024-04-20 12:08:26,992 INFO werkzeug 127.0.0.1 - - [20/Apr/2024 12:08:26] "GET /static/image/example_effects/blur.png HTTP/1.1" 200 -
+2024-04-20 12:08:27,009 INFO werkzeug 127.0.0.1 - - [20/Apr/2024 12:08:27] "GET /static/image/example_effects/black_white.png HTTP/1.1" 200 -
+2024-04-20 12:08:27,015 INFO werkzeug 127.0.0.1 - - [20/Apr/2024 12:08:27] "GET /static/image/example_effects/black_find_edges.png HTTP/1.1" 200 -
+2024-04-20 12:08:27,023 INFO werkzeug 127.0.0.1 - - [20/Apr/2024 12:08:27] "GET /static/image/example_effects/negative.png HTTP/1.1" 200 -
+2024-04-20 12:08:27,076 INFO werkzeug 127.0.0.1 - - [20/Apr/2024 12:08:27] "GET /static/image/example_effects/red+.png HTTP/1.1" 200 -
+2024-04-20 12:08:27,076 INFO werkzeug 127.0.0.1 - - [20/Apr/2024 12:08:27] "GET /static/image/example_effects/violet+.png HTTP/1.1" 200 -
+2024-04-20 12:08:27,086 INFO werkzeug 127.0.0.1 - - [20/Apr/2024 12:08:27] "GET /static/image/example_effects/green+.png HTTP/1.1" 200 -
+2024-04-20 12:08:29,130 INFO werkzeug 127.0.0.1 - - [20/Apr/2024 12:08:29] "GET /make_eff/black_white HTTP/1.1" 200 -
+2024-04-20 12:08:29,151 INFO werkzeug 127.0.0.1 - - [20/Apr/2024 12:08:29] "GET /static/image/example_effects/example_effect.png HTTP/1.1" 200 -
+2024-04-20 12:08:29,152 INFO werkzeug 127.0.0.1 - - [20/Apr/2024 12:08:29] "[36mGET /static/image/example_effects/black_white.png HTTP/1.1[0m" 304 -
+2024-04-20 12:08:39,090 INFO werkzeug 127.0.0.1 - - [20/Apr/2024 12:08:39] "POST /make_eff/black_white HTTP/1.1" 200 -
+2024-04-20 12:08:39,108 INFO werkzeug 127.0.0.1 - - [20/Apr/2024 12:08:39] "GET /static/image/effect_im/kisspng-truncated-icosidodecahedron-truncated-cuboctahedro-5b13d779dc60e1QraHmdnpAg.png HTTP/1.1" 200 -
+2024-04-20 12:08:39,108 INFO werkzeug 127.0.0.1 - - [20/Apr/2024 12:08:39] "GET /static/image/effect_im/kisspng-truncated-icosidodecahedron-truncated-cuboctahedro-5b13d779dc60e1QraHmdnpAg_effect.png HTTP/1.1" 200 -
+2024-04-20 12:08:46,526 INFO werkzeug 127.0.0.1 - - [20/Apr/2024 12:08:46] "GET /create_sketch HTTP/1.1" 200 -
+2024-04-20 12:08:46,547 INFO werkzeug 127.0.0.1 - - [20/Apr/2024 12:08:46] "[36mGET /static/image/sketch_example/example_sketh.png HTTP/1.1[0m" 304 -
+2024-04-20 12:08:46,569 INFO werkzeug 127.0.0.1 - - [20/Apr/2024 12:08:46] "GET /static/image/sketch_example/example.png HTTP/1.1" 200 -

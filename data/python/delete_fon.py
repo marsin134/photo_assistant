@@ -9,6 +9,7 @@ from . import works
 
 
 def remove_background(input_path, output_path):
+    """Удаление фона"""
     input = Image.open(input_path)
     image = correct_size(input)
     output = remove(image)
@@ -16,6 +17,7 @@ def remove_background(input_path, output_path):
 
 
 def delete(upload_folder):
+    """Возвращает обработанное изображение пользователя"""
     upload_folder += '/delete_fon'
     file = request.files['file']
     if file and allowed_file(file.filename):

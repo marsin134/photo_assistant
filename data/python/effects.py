@@ -9,6 +9,8 @@ from flask_login import current_user
 
 UPLOAD_FOLDER = 'static/image/example_effects'
 
+
+# список хранящий адрес шаблонов и название эффектов
 effects = [(UPLOAD_FOLDER + '/' + 'sharpness.png', 'sharpness'),
            (UPLOAD_FOLDER + '/' + 'quantization.png', 'quantization'),
            (UPLOAD_FOLDER + '/' + 'smooth.png', 'smooth'), (UPLOAD_FOLDER + '/' + 'pixel.png', 'pixel'),
@@ -17,6 +19,11 @@ effects = [(UPLOAD_FOLDER + '/' + 'sharpness.png', 'sharpness'),
            (UPLOAD_FOLDER + '/' + 'negative.png', 'negative'),
            (UPLOAD_FOLDER + '/' + 'red+.png', 'red+'), (UPLOAD_FOLDER + '/' + 'violet+.png', 'violet+'),
            (UPLOAD_FOLDER + '/' + 'blue+.png', 'blue+'), (UPLOAD_FOLDER + '/' + 'green+.png', 'green+')]
+
+
+# ============================#
+# ======= Эффекты ============#
+# ============================#
 
 
 def black_white(size, image):
@@ -120,6 +127,7 @@ dict_make_effects = {'sharpness': ImageFilter.Kernel((3, 3), (-1, -1, -1, -1, 9,
 
 
 def make_effect(effect_name, upload_folder):
+    """Добавляет эффект"""
     if effect_name in dict_make_effects:
         effect_fun = dict_make_effects[effect_name]
         im, new_name = apply_the_effect(upload_folder)
@@ -139,6 +147,7 @@ def make_effect(effect_name, upload_folder):
 
 
 def apply_the_effect(upload_folder):
+    """Возвращает обработанное изображение пользователя"""
     file = request.files['file']
     if file and allowed_file(file.filename):
         filename = secure_filename(file.filename)
