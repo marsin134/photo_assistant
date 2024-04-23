@@ -41,7 +41,7 @@ $ ./main.py
 
 ## Структура базы данных
 
-![Структура](/data/db/database_structure.png)
+![Структура](https://github.com/marsin134/photo_assistant/blob/master/db/database_structure.png)
 
 ## API
 
