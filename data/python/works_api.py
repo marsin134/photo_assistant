@@ -1,6 +1,8 @@
 import flask
-from . import db_session
+from . import db_session, correct_image
 from .works import Works
+
+token = correct_image.an_interesting_variable
 
 blueprint = flask.Blueprint(
     'works_api',
@@ -9,7 +11,7 @@ blueprint = flask.Blueprint(
 )
 
 
-@blueprint.route('/api/works')
+@blueprint.route(f'/api/{token}/works')
 def get_works():
     db_sess = db_session.create_session()
     works_list = db_sess.query(Works).all()
@@ -23,7 +25,7 @@ def get_works():
     )
 
 
-@blueprint.route('/api/works/<int:user_id_get>', methods=['GET'])
+@blueprint.route(f'/api/{token}/works/<int:user_id_get>', methods=['GET'])
 def get_one_works(user_id_get):
     db_sess = db_session.create_session()
     works_list = db_sess.query(Works).filter(Works.user_id == int(user_id_get))

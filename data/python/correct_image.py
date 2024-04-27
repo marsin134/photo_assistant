@@ -7,6 +7,8 @@ CHARACTER_LENGTH = 10
 
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'webp'}
 
+an_interesting_variable = 'rYEwfd_secr1Y_izqfjc_et_key942Mnoq'
+
 
 def correct_size(im):
     """Корректирует размер изображения"""

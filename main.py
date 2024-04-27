@@ -1,7 +1,7 @@
 import flask_login
 from data.python.works import Works
 from flask import Flask, render_template, request, redirect, make_response, jsonify
-from data.python import delete_fon, db_session, effects, create_image_sketch, users_api, works_api
+from data.python import delete_fon, db_session, effects, create_image_sketch, users_api, works_api, correct_image
 from data.python.users import User, LoginForm, RegisterForm
 from flask_login import LoginManager, login_user, logout_user
 import logging
@@ -19,7 +19,7 @@ app = Flask(__name__, template_folder="data/html")
 
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-app.config['SECRET_KEY'] = '1'
+app.config['SECRET_KEY'] = correct_image.an_interesting_variable
 
 login_manager = LoginManager()
 login_manager.init_app(app)

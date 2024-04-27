@@ -1,6 +1,8 @@
 import flask
-from . import db_session
+from . import db_session, correct_image
 from .users import User
+
+token = correct_image.an_interesting_variable
 
 blueprint = flask.Blueprint(
     'users_api',
@@ -9,7 +11,7 @@ blueprint = flask.Blueprint(
 )
 
 
-@blueprint.route('/api/users', methods=['GET'])
+@blueprint.route(f'/api/{token}/users', methods=['GET'])
 def get_users():
     db_sess = db_session.create_session()
     users_list = db_sess.query(User).all()
@@ -22,10 +24,10 @@ def get_users():
     )
 
 
-@blueprint.route('/api/users/<int:user_id_get>', methods=['GET'])
+@blueprint.route(f'/api/{token}/users/<int:user_id_get>', methods=['GET'])
 def get_one_user(user_id_get):
     db_sess = db_session.create_session()
-    user = db_sess.query(User).filter(User.user_id == int(user_id_get))
+    user = db_sess.query(User).filter(User.id == int(user_id_get))
     if not user:
         return flask.make_response(flask.jsonify({'error': 'Not found'}), 404)
     return flask.jsonify(
@@ -37,7 +39,7 @@ def get_one_user(user_id_get):
     )
 
 
-@blueprint.route('/api/users', methods=['POST'])
+@blueprint.route(f'/api/{token}/users', methods=['POST'])
 def create_user():
     if not flask.request.json:
         return flask.make_response(flask.jsonify({'error': 'Empty request'}), 400)
@@ -56,7 +58,7 @@ def create_user():
     return flask.jsonify({'id': user.id})
 
 
-@blueprint.route('/api/users/<int:user_id>', methods=['DELETE'])
+@blueprint.route(f'/api/{token}/users/<int:user_id>', methods=['DELETE'])
 def delete_user(user_id):
     db_sess = db_session.create_session()
     user = db_sess.query(User).get(user_id)
@@ -67,18 +69,3 @@ def delete_user(user_id):
     return flask.jsonify({'success': 'OK'})
 
 
-@blueprint.route('/api/users/<int:user_id>', methods=['PUT'])
-def put_user(user_id):
-    db_sess = db_session.create_session()
-    user = db_sess.query(User).filter(User.user_id == int(user_id))
-    if not user:
-        return flask.make_response(flask.jsonify({'error': 'Not found'}), 404)
-    if flask.request.json['login']:
-        user.login = flask.request.json['login']
-    if flask.request.json['email']:
-        user.email = flask.request.json['email']
-    if flask.request.json['is_premium']:
-        user.is_premium = flask.request.json['is_premium']
-
-    db_sess.commit()
-    return flask.jsonify({'success': 'OK'})
